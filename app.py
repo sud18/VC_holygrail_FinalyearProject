@@ -2,8 +2,10 @@ import dash
 import json
 import numpy as np
 import pandas as pd
-import dash_core_components as dcc
-import dash_html_components as html
+#import dash_core_components as dcc
+from dash import dcc
+#import dash_html_components as html
+from dash import html
 import dash_table_experiments as dt
 from dash.dependencies import Input, Output, State
 
@@ -15,8 +17,8 @@ from flask import Flask
 
 # ----------------------------------------------------------------------------------
 
-df_people = pd.read_csv('./data/people.csv').replace('', np.NaN).head(10)
-test_csv = pd.read_csv('./data/test_csv.csv')
+df_people = pd.read_csv('C:/Users/Admin/OneDrive/Desktop/vc_holy_grail-master/Deprecated/data/people.csv', encoding='latin-1').replace('', np.NaN).head(10)
+test_csv = pd.read_csv('C:/Users/Admin/OneDrive/Desktop/vc_holy_grail-master/Final Data and Model/founder_V0.3_founder.csv', encoding='latin-1')
 
 '''Return an HTML generated table. max_rows is initialized to 10 rows,
     dataframe is in a pandas dataframe format'''
@@ -57,7 +59,6 @@ app.layout = html.Div(children=[
         'textAlign': 'center',
         'color': colors['text']
     }),
-
     dcc.Upload(
         id='upload-data',
         children=html.Div([
@@ -74,21 +75,19 @@ app.layout = html.Div(children=[
             'textAlign': 'center',
             'margin': '10px'
         },
+
         # Allow multiple files to be uploaded
         multiple=True
     ),
-
-    dt.DataTable(
-        rows=test_csv.to_dict('records'),
-        columns=test_csv.columns,
+    app.layout == dt.DataTable(id='datatable-test',
+        columns=[{"name": i, "id": i} for i in test_csv.columns],
         row_selectable=True,
         filterable=True,
         sortable=True,
         selected_row_indices=[],
-        id='datatable-test'
+        rows=test_csv.to_dict('records')
         ),
-
-    html.Div(id='selected-indexes'),
+     html.Div(id='selected-indexes'),
     dcc.Graph(
         figure= go.Figure(
             data=[
@@ -140,15 +139,18 @@ app.layout = html.Div(children=[
         ),
         style={'height': 300},
         id='graph-test'
-    )
+    ),
+    
 ],
-style={'background':colors['background']})
+ style ={'background':colors['background']}
 
+)
 # ----------------------------------------------------------------------------------
 # Additional CSS
 app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"})
 
 # ----------------------------------------------------------------------------------
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)
