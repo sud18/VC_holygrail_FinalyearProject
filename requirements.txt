@@ -3,5 +3,7 @@ numpy
 sklearn
 seaborn
 flask
-dash
+dash==2.0.0
 xgboost
+plotly
+dash_table_experiments
