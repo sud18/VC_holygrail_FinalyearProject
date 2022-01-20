@@ -1,6 +1,7 @@
 pandas
 numpy
 sklearn
+gunicorn
 seaborn
 flask
 dash==2.0.0
