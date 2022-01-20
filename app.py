@@ -17,8 +17,8 @@ from flask import Flask
 
 # ----------------------------------------------------------------------------------
 
-df_people = pd.read_csv('/workspace/VC_holygrail_FinalyearProject/Deprecated/data/people.csv', encoding='latin-1').replace('', np.NaN).head(10)
-test_csv = pd.read_csv('/workspace/VC_holygrail_FinalyearProject/Final Data and Model/founder_V0.3_founder.csv', encoding='latin-1')
+df_people = pd.read_csv('Deprecated/data/people.csv', encoding='latin-1').replace('', np.NaN).head(10)
+test_csv = pd.read_csv('Final Data and Model/founder_V0.3_founder.csv', encoding='latin-1')
 
 '''Return an HTML generated table. max_rows is initialized to 10 rows,
     dataframe is in a pandas dataframe format'''
